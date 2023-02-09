@@ -1,0 +1,19 @@
+#tableProp {
+    margin-left: 3%;
+    margin-right: 3%;
+    margin-top: 1%;
+    border: 3px solid black;
+    border-radius: 9px;
+    margin-top: 2%;
+}
+
+#title {
+    margin-top: 3%;
+}
+
+#info_task {
+    text-align: right;
+    margin: 10px;
+    color: green;
+    font-weight: bolder;
+}

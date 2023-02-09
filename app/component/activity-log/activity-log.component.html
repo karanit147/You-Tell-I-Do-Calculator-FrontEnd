@@ -1,0 +1,66 @@
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="">Calculation Zone</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link active" href="dashboard">Dashboard <span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link" href="activityLog">Activity Log</a>
+      </div>
+    </div>
+    <div class="form-inline my-2 my-lg-0">
+        <a class="btn btn-outline-light my-2 my-sm-0" href="" (click)="logoutUser()">Logout</a>
+    </div>
+</nav>
+
+<div id="info_task">* Your specific Tasks are marked in Green </div>
+
+<div class="text-center">
+  <h2 id="title" class="text-center"> Student Database</h2>
+  <div id="tableProp">
+
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Task Id</th>
+          <th scope="col">Email-Id</th>
+          <th scope="col">Input Question</th>
+          <th scope="col">Output Result</th>
+          <th scope="col">Completion Status</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr *ngFor = "let tempLog of allTaskList" >
+
+          <div *ngIf="checkForMyTask(tempLog.toStudentMailId);then myTask else otherTask">here is ignored</div>
+          <ng-template #myTask>
+            <td class="text-white bg-success" scope="row">{{tempLog.id}}</td>
+            <td class="text-white bg-success">{{tempLog.toStudentMailId}}</td>
+            <td class="text-white bg-success">{{tempLog.inputQuestion}}</td>
+            <td class="text-white bg-success">{{tempLog.outputResult}}</td>
+            <td class="text-white bg-success">
+              <div *ngIf="tempLog.completionStatus;then completed else inComplete">here is ignored</div>
+              <ng-template #completed>Done</ng-template>
+              <ng-template #inComplete>Pending</ng-template>
+            </td>
+          </ng-template>
+          <ng-template #otherTask>
+            <td scope="row">{{tempLog.id}}</td>
+            <td>{{tempLog.toStudentMailId}}</td>
+            <td>{{tempLog.inputQuestion}}</td>
+            <td>{{tempLog.outputResult}}</td>
+            <td>
+              <div *ngIf="tempLog.completionStatus;then completed else inComplete">here is ignored</div>
+              <ng-template #completed>Done</ng-template>
+              <ng-template #inComplete>Pending</ng-template>
+            </td>
+          </ng-template>
+
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>

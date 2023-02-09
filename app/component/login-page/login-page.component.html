@@ -1,0 +1,40 @@
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="">Calculation Zone</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    </div>
+    <div class="form-inline my-2 my-lg-0">
+        <a class="btn btn-outline-light my-2 my-sm-0" href="">Back</a>
+    </div>
+</nav>
+
+<div class="container">
+    <form (ngSubmit) = "onSubmit()">
+        <h1 class="text-center">Login</h1><br>
+        <!-- Email input -->
+        <div class="form-outline mb-4">
+            <label class="form-label" for="form2Example1">Email address</label>
+            <input type="email" id="form2Example1" class="form-control" 
+            [(ngModel)]="loginCred.email" name="email"/>
+        </div>
+    
+        <!-- Password input -->
+        <div class="form-outline mb-4">
+            <label class="form-label" for="form2Example2">Password</label>
+            <input type="password" id="form2Example2" class="form-control" 
+            [(ngModel)]="loginCred.password" name="password"/>        
+        </div>
+
+        <br>
+    
+        <!-- Submit button -->
+        <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
+    
+        <!-- Register buttons -->
+        <div class="text-center">
+            <p>Not a member? <a href="signUp">Register</a></p>
+        </div>
+    </form>
+</div>

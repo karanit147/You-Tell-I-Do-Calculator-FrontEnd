@@ -1,0 +1,30 @@
+<div *ngIf="checkIfLoggedIn(); else elseBlock">
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="">Calculation Zone</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link active" href="dashboard">Dashboard <span class="sr-only">(current)</span></a>
+          <a class="nav-item nav-link" href="activityLog">Activity Log</a>
+        </div>
+      </div>
+      <div class="form-inline my-2 my-lg-0">
+          <a class="btn btn-outline-light my-2 my-sm-0" href="login">Logout</a>
+      </div>
+    </nav>
+  </div>
+  <ng-template #elseBlock>
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="">Calculation Zone</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      </div>
+      <div class="form-inline my-2 my-lg-0">
+          <a class="btn btn-outline-light my-2 my-sm-0" href="login">Login</a>
+      </div>
+    </nav>
+  </ng-template>

@@ -1,0 +1,135 @@
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="">Calculation Zone</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active" href="dashboard">Dashboard <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="activityLog">Activity Log</a>
+    </div>
+  </div>
+  <div class="form-inline my-2 my-lg-0">
+      <a class="btn btn-outline-light my-2 my-sm-0" href="" (click)="logoutUser()">Logout</a>
+  </div>
+</nav>
+
+<!-- my info car starts -->
+
+<div id="myInfoCard">
+  <div class="card text-center">
+    <div class="card-header text-white bg-dark">
+      <h5>My Info</h5>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Name: {{myUserInfo.name}}</h5>
+      <h5 class="card-text">Role: {{myUserInfo.role}}</h5>
+      <h5 class="card-text">E-mail: {{myUserInfo.email}}</h5>
+    </div>
+  </div>
+</div>
+
+<!-- table starts -->
+
+<div *ngIf="checkIfMaster(myUserInfo.role);then master else student">here is ignored</div>
+<!-- table for master -->
+<ng-template #master>
+  
+  <div class="text-center">
+    <h4 class="text-center"> Student Database</h4>
+    <div id="tableProp">
+  
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">email</th>
+            <th scope="col">Full Name</th>
+            <th scope="col">Role</th>
+            <th scope="col">Assign Task</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor = "let tempUser of studentList" >
+            <th scope="row">{{tempUser.email}}</th>
+            <td>{{tempUser.name}}</td>
+            <td>{{tempUser.role}}</td>
+            <td><button class="btn btn-primary" (click)="performAskStudent(tempUser.email)">Ask for Input</button></td>
+          </tr>
+        </tbody>
+      </table>
+  
+    </div>
+  </div>
+</ng-template>
+
+<!-- table for student -->
+<ng-template #student>
+
+  <div class="text-center">
+    <h4 class="text-center"> My Task Database</h4>
+    <div id="tableProp">
+
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Task Id</th>
+            <th scope="col">completionStatus</th>
+            <th scope="col">Ask Question</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor = "let tempTask of myTaskList" >
+            <th scope="row">{{tempTask.id}}</th>
+            <td>
+              <div *ngIf="tempTask.completionStatus;then completed else inComplete">here is ignored</div>
+              <ng-template #completed>Done</ng-template>
+              <ng-template #inComplete>Pending</ng-template>
+            </td>
+            <td>
+              <button type="button" class="btn btn-success" id="askQuestion" data-toggle="modal" data-target="#exampleModal" [disabled]="tempTask.completionStatus" (click)="assignTaskId(tempTask.id)">Ask Question</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+
+</ng-template>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true" style="margin-top: 10%;">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Ask Question</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div class="container">
+          <form ngNativeValidate>
+
+            <div class="form-group">
+              <div class="form-outline mb-3">
+                <label for="form3Example1cg">example: five(times(seven()))</label>
+                <input type="textarea" id="form3Example1cg" class="form-control form-control-lg" 
+                name="question" [(ngModel)]="questionAsked"  placeholder="Type your input here!" />
+
+            </div>
+
+            </div>
+          </form>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="submitQuestion(taskId, questionAsked)">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
